@@ -1,0 +1,46 @@
+import math
+
+# When this file runs, it takes user inputs, and outputs either investment/bond earnings,
+# or repayment amounts.
+
+# This defines key program choice variables. (i.e if 'investment' is chosen / If 'simple' is chosen).
+which_calculation_choice = "investment"
+interest = "simple"
+
+# The following is an if-elif-else structure which gets input for use in latter calculations.
+# It outputs money amounts at the end (earnings/repayments), based on user choices and data provided.
+which_calculation_choice = input("\ninvestment - to calculate the amount of interest you'll earn on your investment\nbond\t   - to calculate the amount you'll have to pay on a home loan\n\nEnter either 'investment' or 'bond' from the menu above to proceed: ")
+if which_calculation_choice.lower() == "investment":
+    deposit_amount = input("Enter the amount of money you are depositing: ")
+    deposit_amount = float(deposit_amount)
+    P = deposit_amount
+    interest_rate_number = input("Enter the interest rate - do not type a percentage symbol: ")
+    interest_rate_number = float(interest_rate_number)
+    r = interest_rate_number / 100
+    years = input("Please enter the number of years you plan investing for: ")
+    years = int(years)
+    t = years
+    interest = input("Please enter whether you would like \'simple\' or \'compound\' interest: ")
+    if interest.lower() == "simple":
+        A = P * (1 + r*t)
+        print(f"With an interest rate of {interest_rate_number}% over {years} years, you should earn £{A} on your investment.")
+    elif interest.lower() == "compound":
+        A = P * math.pow((1+r),t)
+        print(f"With an interest rate of {interest_rate_number}% over {years} years, you should earn £{A} on your investment.")
+    else:
+        print("Wrong entry. Navigate back to the front screen and try again. Please only type a suggested options.")    
+elif which_calculation_choice.lower() == "bond":
+    house_value = input("Please enter the current value of your property: ")
+    house_value = float(house_value)
+    P = house_value
+    interest_rate_number = input("Please enter the Bond interest rate: ")
+    interest_rate_number = float(interest_rate_number)
+    i = (interest_rate_number / 100) / 12 
+    months = input("Please enter the number of months you plan to take to repay the Bond: ")
+    months = int(months)
+    n = months
+    repayment = (i * P)/(1 - (1 + i)**(-n))
+    print(f"Based on an interest rate of {interest_rate_number}% over a term of {months}, your repayments will be £{repayment} monthly.")
+else:
+    print('''Sorry something went wrong. Refresh your screen or return to the start to try again. 
+Remember to only type one of the options suggested.''')
